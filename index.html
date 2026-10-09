@@ -2,7 +2,24 @@
 const P={
 francis:{name:"Francis Cooke",dates:"c. 1583–1663",spouses:[{name:"Hester Mahieu",children:["jane","john","jacob","hester","mary"]}]},
 jane:{name:"Jane Cooke",spouses:[{name:"Experience Mitchell",children:[]}]},
-john:{name:"John Cooke",spouses:[{name:"Sarah Warren",children:[]}]},
+john:{name:"John Cooke",spouses:[{name:"Sarah Warren",children:["johnsarah","johnelizabeth","johnhester","johnmary","johnmercy"]}]},
+johnsarah:{name:"Sarah Cooke",dates:"c. 1635–1713",spouses:[{name:"Arthur Hathaway",children:[]}]},
+johnelizabeth:{name:"Elizabeth Cooke",dates:"c. 1641–1715",spouses:[{name:"Daniel Wilcox",children:["wilcoxmary","wilcoxstephen","wilcoxjohn","wilcoxlydia","wilcoxsarah","wilcox edward","wilcoxthomas","wilcoxsusannah"]}]},
+johnhester:{name:"Hester (Esther) Cooke",dates:"1650–before 1672",spouses:[{name:"Thomas Taber",children:[]}]},
+johnmary:{name:"Mary Cooke",dates:"c. 1652–1714/15",spouses:[{name:"Philip Taber",children:[]}]},
+johnmercy:{name:"Mercy Cooke",dates:"1657–1733",spouses:[{name:"Stephen West",children:[]}]},
+wilcoxmary:{name:"Mary Wilcox",spouses:[]},
+wilcoxstephen:{name:"Stephen Wilcox",spouses:[{name:"Susanna Briggs",children:["wilcoxstephen2"]}]},
+wilcoxjohn:{name:"John Wilcox",spouses:[]},
+wilcoxlydia:{name:"Lydia Wilcox",spouses:[]},
+wilcoxsarah:{name:"Sarah Wilcox",spouses:[]},
+"wilcox edward":{name:"Edward Wilcox",spouses:[]},
+wilcoxthomas:{name:"Thomas Wilcox",spouses:[]},
+wilcoxsusannah:{name:"Susannah Wilcox",spouses:[]},
+wilcoxstephen2:{name:"Stephen Wilcox",spouses:[{name:"Mary Thomas",children:["tyle1"]}]},
+tyle1:{name:"Tyle Wilcox",spouses:[{name:"Deborah Russell",children:["tyle2"]}]},
+tyle2:{name:"Tyle Wilcox",spouses:[{name:"Hannah Andrus",children:["susanwilcox"]}]},
+susanwilcox:{name:"Susan Wilcox",dates:"born 1800",spouses:[{name:"Edmund Jay Sherman",children:[]}]},
 jacob:{name:"Jacob Cooke",dates:"c. 1618–1675",spouses:[{name:"Damaris Hopkins",children:["elizabeth","caleb","jacobjr","maryj","martha","francisj","ruth"]},{name:"Elizabeth (Lettice) Shurtleff",children:["sarah","rebecca"],probable:true}]},
 hester:{name:"Hester Cooke",spouses:[{name:"Richard Wright",children:[]}]},
 mary:{name:"Mary Cooke",spouses:[{name:"John Thompson",children:[]}]},
@@ -15,5 +32,5 @@ francisj:{name:"Francis Cooke",dates:"1661/62",spouses:[{name:"Elizabeth Latham"
 ruth:{name:"Ruth Cooke",dates:"1664/65",spouses:[]},
 sarah:{name:"Sarah Cooke",dates:"c. 1670–71",probable:true,spouses:[{name:"Robert Bartlett",children:[]}]},
 rebecca:{name:"Rebecca Cooke",probable:true,spouses:[]}
-};let path=["francis"];const el=document.getElementById("app");function openPerson(id){path.push(id);render()}function back(){if(path.length>1)path.pop();render()}function render(){const id=path[path.length-1],p=P[id];el.innerHTML=(path.length>1?'<button class="back" id="back">← Back to '+P[path[path.length-2]].name+'</button>':'')+'<div class="card"><div class="small">Generation '+path.length+'</div><h2>'+p.name+'</h2><div>'+ (p.dates||"Dates not recorded")+'</div>'+(p.probable?'<p class="note">Probable relationship: further verification required.</p>':'')+'</div>'+p.spouses.map(s=>'<section class="card"><h3>Spouse: '+s.name+'</h3>'+(s.probable?'<p class="note">Children below are probable, not conclusively established.</p>':'')+(s.children.length?s.children.map(c=>'<button class="child" data-person="'+c+'">'+P[c].name+(P[c].dates?' · '+P[c].dates:'')+' →</button>').join(''):'<p class="small">No further children entered in this research sample. This does not mean there were none.</p>')+'</section>').join('')+'<p class="note">Research sample, not a complete or independently verified genealogy. Check individual relationships against original records and Mayflower Society publications. Source guide: <a href="https://themayflowersociety.org/">General Society of Mayflower Descendants</a>.</p>';document.querySelectorAll('[data-person]').forEach(b=>b.addEventListener('click',()=>openPerson(b.dataset.person)));const btn=document.getElementById('back');if(btn)btn.addEventListener('click',back)}render();
+};let path=["francis"];const el=document.getElementById("app");function openPerson(id){path.push(id);render()}function back(){if(path.length>1)path.pop();render()}function render(){const id=path[path.length-1],p=P[id];el.innerHTML=(path.length>1?'<button class="back" id="back">← Back to '+P[path[path.length-2]].name+'</button>':'')+'<div class="card"><div class="small">Generation '+path.length+'</div><h2>'+p.name+'</h2><div>'+ (p.dates||"Dates not recorded")+'</div>'+(p.probable?'<p class="note">Probable relationship: further verification required.</p>':'')+'</div>'+p.spouses.map(s=>'<section class="card"><h3>Spouse: '+s.name+'</h3>'+(s.probable?'<p class="note">Children below are probable, not conclusively established.</p>':'')+(s.children.length?s.children.map(c=>'<button class="child" data-person="'+c+'">'+P[c].name+(P[c].dates?' · '+P[c].dates:'')+' →</button>').join(''):'<p class="small">No further children entered in this research sample. This does not mean there were none.</p>')+'</section>').join('')+'<p class="note">Research sample, not a complete or independently verified genealogy. Check individual relationships against original records and Mayflower Society publications. Sources: <a href="https://themayflowersociety.org/passenger-profile/passenger-profiles/the-cooke-family/">Mayflower Society</a>; <a href="https://edwardwilcoxdescendants.com/hello-world/">Wilcox family research</a>; <a href="https://globaluserfiles.com/media/1687_b67ca4bb2e69276338cf9c2d77d167f2dad32c48.pdf/o/twc%201987%20c.pdf">Warren Cousins (1987), Wilcox lineage</a>. Later-generation links are published secondary claims pending original-record review.</p>';document.querySelectorAll('[data-person]').forEach(b=>b.addEventListener('click',()=>openPerson(b.dataset.person)));const btn=document.getElementById('back');if(btn)btn.addEventListener('click',back)}render();
 </script></body></html>
